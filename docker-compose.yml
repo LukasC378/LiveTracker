@@ -1,0 +1,50 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:15
+    container_name: db_container
+    restart: always
+    ports:
+      - 5433:5432
+    environment:
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=0000
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval    : 1s
+      timeout: 5s
+      retries: 10
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 5050:80 
+  web-app:
+    container_name: web_app_container
+    build: ./LiveTrackerWebApp
+    ports:
+      - "8071:8070"
+  web-api:
+    container_name: web_api_container
+    build:
+        context: ./LiveTrackerWebAPI
+        dockerfile: ./API/Dockerfile
+    ports:
+      - "8081:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+  session-api:
+    container_name: session_api_container
+    build:
+        context: ./LiveTrackerSessionAPI
+        dockerfile: ./LiveTrackerSessionAPI/Dockerfile
+    ports:
+      - "8091:8090"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8090    
+  

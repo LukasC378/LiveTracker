@@ -1,0 +1,7 @@
+.my-cluster {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px; /* Set the line height to vertically center the text */
+}

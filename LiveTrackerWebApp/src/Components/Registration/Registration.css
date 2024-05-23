@@ -1,0 +1,16 @@
+.sign-up-form{
+    padding-top: 80px;
+    width: 400px;
+    max-width: 500px;
+    min-width: 150px;
+}
+
+.email-send{
+    border: 5px solid #e10600;
+    border-radius: 15px;
+}
+
+.note{
+    font-size: x-small;
+    color: grey;
+}

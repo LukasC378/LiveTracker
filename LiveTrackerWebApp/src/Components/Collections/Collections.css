@@ -1,0 +1,37 @@
+.add-form {
+    padding-top: 40px;
+    width: 400px;
+    max-width: 500px;
+    min-width: 150px;
+}
+
+.table-head{
+    background: black;
+}
+
+.white-font{
+    color: white !important;
+}
+
+.color-div{
+    width: 25px;
+    height: 25px;
+    border-radius: 20%;
+}
+
+.error-cell{
+    background-color: rgba(255, 0, 0, 0.16);
+}
+
+.error-row{
+    background-color: rgba(255, 0, 0, 0.16);
+}
+
+.error-box{
+    color: #212529;
+    background-color: #fff;
+    border-color: #fe8686 !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(253, 13, 13, 0.25) !important;
+}
+
