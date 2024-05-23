@@ -8,7 +8,7 @@ ARG VITE_RECAPTCHA_SITE_KEY
 # Set environment variables during the build process
 ENV VITE_SERVER_URL=http://localhost:8081
 ENV VITE_TRACK_SERVER_URL=http://localhost:8091/racehub
-ENV VITE_RECAPTCHA_SITE_KEY=6LdmBPYkAAAAABUZjIongRTV9f1Flm7hqdfKF5r6
+ENV VITE_RECAPTCHA_SITE_KEY=xxx
 
 WORKDIR /app
 
