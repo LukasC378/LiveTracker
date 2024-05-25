@@ -2,6 +2,7 @@
 using System.Text;
 using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Npgsql;
 using SessionAPICommonModels;
@@ -10,17 +11,21 @@ using SessionAPICommonModels.Dtos;
 
 #region Program
 
+var configuration = GetConfiguration();
+
+var baseAddress = configuration.GetSection("SessionApiAddress").Value!;
+var user = configuration.GetSection("SessionApiUser").Value!;
+var password = configuration.GetSection("SessionApiPassword").Value!;
+var connectionString = configuration.GetSection("ConnectionString").Value!;
+var delay = Convert.ToInt32(configuration.GetSection("Delay").Value!);
+var raceId = Convert.ToInt32(configuration.GetSection("RaceId").Value!);
+
 var client = new HttpClient
 {
-    BaseAddress = new Uri("https://localhost:7111")
+    BaseAddress = new Uri(baseAddress)
 };
 
-const string user = "SessionApiUser";
-const string password = ";q%%%hP[cD#'z6F3d@k3s(5x-@Z";
-const string connectionString = "Server=127.0.0.1;Port=5432;Database=race_tracker_db;User Id=postgres;Password=0000;Include Error Detail=true;";
-
-const int delay = 200;
-const int raceId = 2;
+Console.WriteLine("START");
 
 var random = new Random();
 
@@ -291,7 +296,7 @@ void LoadRaceData(RaceDataDto raceDataDto1)
     var json = JsonConvert.SerializeObject(raceDataDto1);
     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-    const string authenticationString = $"{user}:{password}";
+    var authenticationString = $"{user}:{password}";
     var base64EncodedAuthenticationString = Convert.ToBase64String(Encoding.ASCII.GetBytes(authenticationString));
 
     var requestMessage = new HttpRequestMessage(HttpMethod.Post, "race/load");
@@ -333,4 +338,17 @@ void SendGpsDataToBackend()
     Console.WriteLine(result.StatusCode);
 }
 
+IConfiguration GetConfiguration()
+{
+    var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+    var appsettings = string.IsNullOrEmpty(environmentName) ? "appsettings.json" : $"appsettings.{environmentName}.json";
+
+    var builder = new ConfigurationBuilder()
+        .AddJsonFile(appsettings, true, true);
+        //.AddEnvironmentVariables();
+    var configuration = builder.Build();
+
+    return configuration;
+}
 #endregion
