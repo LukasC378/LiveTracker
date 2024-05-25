@@ -19,6 +19,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 8070
-EXPOSE 8071
 
 CMD [ "npm", "run", "dev" ]

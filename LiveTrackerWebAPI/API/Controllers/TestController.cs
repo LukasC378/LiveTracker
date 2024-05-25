@@ -164,4 +164,49 @@ public class TestController : Controller
             var a = ex.Message;
         }
     }
+
+    [HttpPost("seedUsers")]
+    public async Task SeedUsers()
+    {
+        try
+        {
+            var name = "Organizer";
+            var email = "organizer@test.com";
+            var registrationFirstResult = await _registrationService.SendRegistrationLinkAsync(email);
+            if (registrationFirstResult != RegistrationFirstResultEnum.Ok)
+            {
+                throw new Exception("registration first failed");
+            }
+
+            var link = (await DbContext.Registration.FirstAsync(x => x.Email == email)).Link;
+            await _registrationService.RegisterUserAsync(new UserToRegisterDto
+            {
+                Link = link,
+                Username = name,
+                Password = name,
+                Role = UserRoleEnum.Organizer
+            });
+
+            name = "User";
+            email = "user@test.com";
+            registrationFirstResult = await _registrationService.SendRegistrationLinkAsync(email);
+            if (registrationFirstResult != RegistrationFirstResultEnum.Ok)
+            {
+                throw new Exception("registration first failed");
+            }
+
+            link = (await DbContext.Registration.FirstAsync(x => x.Email == email)).Link;
+            await _registrationService.RegisterUserAsync(new UserToRegisterDto
+            {
+                Link = link,
+                Username = name,
+                Password = name,
+                Role = UserRoleEnum.NormalUser
+            });
+        }
+        catch (Exception ex)
+        {
+            var a = ex.Message;
+        }
+    }
 }

@@ -19,8 +19,8 @@ const string user = "SessionApiUser";
 const string password = ";q%%%hP[cD#'z6F3d@k3s(5x-@Z";
 const string connectionString = "Server=127.0.0.1;Port=5432;Database=race_tracker_db;User Id=postgres;Password=0000;Include Error Detail=true;";
 
-const int delay = 300;
-const int raceId = 7;
+const int delay = 200;
+const int raceId = 2;
 
 var random = new Random();
 
@@ -28,8 +28,8 @@ string token;
 IDictionary<string, int> drivers = new Dictionary<string, int>();
 IList<Position> points;
 
-//SimulateRace();
-StartStressTest();
+SimulateRace();
+//StartStressTest();
 
 #endregion
 
@@ -329,8 +329,8 @@ void SendGpsDataToBackend()
     httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
     httpRequestMessage.Content = content;
 
-    var result = Task.Run(async () => await client.SendAsync(httpRequestMessage)).Result.StatusCode;
-    Console.WriteLine(result);
+    var result = Task.Run(async () => await client.SendAsync(httpRequestMessage)).Result;
+    Console.WriteLine(result.StatusCode);
 }
 
 #endregion

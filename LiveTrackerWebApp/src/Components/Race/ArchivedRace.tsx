@@ -218,7 +218,7 @@ const ArchivedRaceComponent = () => {
 
     function show(){
         let item = currentArray.current[currentArrayIndex.current]
-        laps.current = item.lapCount
+        currentLap.current = item.lapCount
         setGpsData(() => item.driversData)
     }
 
@@ -460,9 +460,15 @@ const ArchivedRaceComponent = () => {
                     </Col>
                     <Col>
                         {
-                            laps.current > 0 &&
+                            laps.current > 0 && currentLap.current <= laps.current &&
                             <div>
                                 <strong>Lap {currentLap.current} / {laps.current}</strong>
+                            </div>
+                        }
+                        {
+                            laps.current > 0 && currentLap.current > laps.current &&
+                            <div>
+                                <strong>Finish</strong>
                             </div>
                         }
                         <div style={{maxHeight: '900px', overflowY: 'auto'}}>

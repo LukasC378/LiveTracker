@@ -40,16 +40,28 @@ const SessionCardsComponent = forwardRef((props: any, _) => {
                 );
             case SessionStateEnum.Archived:
                 return(
-                    <div>
-                        <Button
-                            className={"btn-warning"}
-                            onClick={() => {
-                                navigate('/sessions/'+sessionId)
-                            }}
-                        >
-                            Watch from archive
-                        </Button>
-                    </div>
+                    <Row>
+                        <Col>
+                            <Button
+                                className={"btn-warning"}
+                                onClick={() => {
+                                    navigate('/sessions/'+sessionId)
+                                }}
+                            >
+                                Watch from archive
+                            </Button>
+                        </Col>
+                        <Col>
+                            <Button
+                                className={"btn-primary"}
+                                onClick={() => {
+                                    navigate('/sessions/result/'+sessionId)
+                                }}
+                            >
+                                Results
+                            </Button>
+                        </Col>
+                    </Row>
                 );
         }
     }

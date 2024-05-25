@@ -13,7 +13,7 @@ import {useGoogleReCaptcha} from "react-google-recaptcha-v3";
 import RecaptchaService from "../../Services/RecaptchaService";
 import {User} from "../../Models/User";
 
-const actionName: string = "registration_second";
+const actionName: string = "login";
 
 const LoginComponent = () => {
 
@@ -167,9 +167,9 @@ const LoginComponent = () => {
                         <Button style={{width: 200}} type={"submit"} variant={"dark"}>Login</Button>
                     </div>
                 </Form>
-                <div className={"pt-1"}>
-                    <Link to={"/"}>Forgot password</Link>
-                </div>
+                {/*<div className={"pt-1"}>*/}
+                {/*    <Link to={"/"}>Forgot password</Link>*/}
+                {/*</div>*/}
                 <div className={"pt-3"}>
                     <Link to={"/sign-up"}>Create account</Link>
                 </div>

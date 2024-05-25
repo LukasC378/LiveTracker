@@ -208,9 +208,15 @@ const LiveRaceComponent = () => {
                 </Col>
                 <Col>
                     {
-                        laps.current > 0 &&
+                        laps.current > 0 && currentLap.current <= laps.current &&
                         <div>
                             <strong>Lap {currentLap.current} / {laps.current}</strong>
+                        </div>
+                    }
+                    {
+                        laps.current > 0 && currentLap.current > laps.current &&
+                        <div>
+                            <strong>Finish</strong>
                         </div>
                     }
                     <div style={{maxHeight: '900px', overflowY: 'auto'}}>

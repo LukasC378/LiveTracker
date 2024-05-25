@@ -29,7 +29,7 @@ export class apiClient{
         }
         catch (error: any){
             if(!error?.response?.status){
-                //window.location.replace('/error');
+                window.location.replace('/error');
                 return Promise.reject(error);
             }
             if (error.response.status === 401 && sessionStorage.getItem('user')) {
@@ -49,12 +49,12 @@ export class apiClient{
             else if(error.response.status === 403){
                 window.location.replace('/forbidden');
             }
-            // else if(error.response.status === 404){
-            //     window.location.replace('/404');
-            // }
-            // else{
-            //     window.location.replace('/error');
-            // }
+            else if(error.response.status === 404){
+                window.location.replace('/404');
+            }
+            else{
+                window.location.replace('/error');
+            }
             return Promise.reject(error);
         }
     }

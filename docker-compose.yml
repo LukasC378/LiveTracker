@@ -26,7 +26,7 @@ services:
     container_name: web_app_container
     build: ./LiveTrackerWebApp
     ports:
-      - "8071:8070"
+      - "8070:8070"
   web-api:
     container_name: web_api_container
     build:
@@ -37,6 +37,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      db:
+        condition: service_healthy
   session-api:
     container_name: session_api_container
     build:
@@ -47,4 +50,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8090    
+    depends_on:
+      db:
+        condition: service_healthy
   

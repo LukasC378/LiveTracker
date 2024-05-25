@@ -111,6 +111,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     app.ApplyMigration();
+    app.ApplyDbExtensions(builder.Configuration);
 }
 app.UseCors("AllowSpecificOrigins");
 
