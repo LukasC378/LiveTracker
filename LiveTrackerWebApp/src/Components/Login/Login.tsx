@@ -170,7 +170,7 @@ const LoginComponent = () => {
                 {/*<div className={"pt-1"}>*/}
                 {/*    <Link to={"/"}>Forgot password</Link>*/}
                 {/*</div>*/}
-                <div className={"pt-3"}>
+                <div className={"pt-1"}>
                     <Link to={"/sign-up"}>Create account</Link>
                 </div>
             </div>
